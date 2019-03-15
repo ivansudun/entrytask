@@ -1,0 +1,4 @@
+1.测试脚本：EntryTask.postman_collection.json
+2.测试报告；report目录，分json和cli两种格式的报告
+3.命令行调度自动脚本运行指令  newman run EntryTask.postman_collection.json -r cli,json
+  将新建一个newman目录，存放json格式的测试报告

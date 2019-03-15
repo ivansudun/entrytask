@@ -1,0 +1,78 @@
+bogon:PartB_postman dunsun$ newman run EntryTask.postman_collection.json -r cli,json
+newman
+
+EntryTask
+
+→ 参数a和b均合 有效
+  GET http://127.0.0.1:8080/test?a=1&b=Ivan [200 OK, 221B, 93ms]
+  ✓  Status code is 200
+  ✓  response must be a valid json body
+  ✓  reponse json schema matched
+  ✓  err_code in response json is expected
+  ✓  reference is expected when err_code = 0
+  ✓  err_msg is right when err_code = 0
+
+→ 不传入参数a
+  GET http://127.0.0.1:8080/test?b=Ivan [200 OK, 245B, 6ms]
+  ✓  Status code is 200
+  ✓  response must be a valid json body
+  ✓  reponse json schema matched
+  ✓  err_code in response json is expected
+  ✓  reference is expected when err_code != 0
+  ✓  reference is expected when err_code = 21
+
+→ 参数a为空
+  GET http://127.0.0.1:8080/test?a=&b=Ivan [200 OK, 245B, 5ms]
+  ✓  Status code is 200
+  ✓  response must be a valid json body
+  ✓  reponse json schema matched
+  ✓  err_code in response json is expected
+  ✓  reference is expected when err_code != 0
+  ✓  reference is expected when err_code = 21
+
+→ 参数a不为int
+  GET http://127.0.0.1:8080/test?a=notint&b=Ivan [200 OK, 245B, 5ms]
+  ✓  Status code is 200
+  ✓  response must be a valid json body
+  ✓  reponse json schema matched
+  ✓  err_code in response json is expected
+  ✓  reference is expected when err_code != 0
+  ✓  reference is expected when err_code = 21
+
+→ 不传入参数b
+  GET http://127.0.0.1:8080/test?a=1 [200 OK, 245B, 3ms]
+  ✓  Status code is 200
+  ✓  response must be a valid json body
+  ✓  reponse json schema matched
+  ✓  err_code in response json is expected
+  ✓  reference is expected when err_code != 0
+  ✓  reference is expected when err_code = 21
+
+→ 参数b为空
+  GET http://127.0.0.1:8080/test?a=1&b= [200 OK, 245B, 4ms]
+  ✓  Status code is 200
+  ✓  response must be a valid json body
+  ✓  reponse json schema matched
+  ✓  err_code in response json is expected
+  ✓  reference is expected when err_code != 0
+  ✓  reference is expected when err_code = 21
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │                6 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │                6 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │                6 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               36 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 307ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 516B (approx)                            │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 19ms [min: 3ms, max: 93ms, s.d.: 32ms] │
+└───────────────────────────────────────────────────────────────┘

@@ -1,0 +1,1981 @@
+{
+	"info": {
+		"_postman_id": "4a855773-451c-4b65-a909-390c833c46b0",
+		"name": "EntryTask",
+		"description": "测试EntryTask的实现的接口/test\n\n接口详细说明\n#请求参数\n- \"a\": int，不可为空\n- \"b\": string,不可为空\n\n#返回结果\n返回为json格式数据，包含如下字段：\n- \"err_code\": int, 不会为空，可取值0，11，21\n- \"err_msg\": string,不会为空，\"err_msg\"和\"err_code\"一一对应\n- “reference”:string,不会为空。\"err_code\"为0时，格式为\"No. {a} is {b}\"，其中{a}和{b}为请求传入参数；\"err_code\"不为0时同\"err_msg\"\n\n\"err_code\"和\"err_msg\"对应关系：\n- 0：success\n- 11: system error\n- 21: empry or wrong params\n\n示例如下\nhttp://127.0.0.1:8080/test?a=1&b=Ivan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "参数a和b均合法\b有效",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/test?a=1&b=Ivan",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					],
+					"query": [
+						{
+							"key": "a",
+							"value": "1"
+						},
+						{
+							"key": "b",
+							"value": "Ivan"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "不传入参数a",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/test?b=Ivan",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					],
+					"query": [
+						{
+							"key": "b",
+							"value": "Ivan"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "参数\ba为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": ""
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数b为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1&b=",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a不为int",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=notint&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "notint"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "不传入参数b",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a和b均合法有效",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/test?a=1&b=Ivan",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "不传入参数\ba",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				}
+			]
+		},
+		{
+			"name": "参数a为空",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/test?a=&b=Ivan",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					],
+					"query": [
+						{
+							"key": "a",
+							"value": ""
+						},
+						{
+							"key": "b",
+							"value": "Ivan"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "不传入参数\ba",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数b为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1&b=",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a和b均合法有效",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/test?a=1&b=Ivan",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "不传入参数b",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数\ba为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": ""
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a不为int",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=notint&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "notint"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				}
+			]
+		},
+		{
+			"name": "参数a不为int",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/test?a=notint&b=Ivan",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					],
+					"query": [
+						{
+							"key": "a",
+							"value": "notint"
+						},
+						{
+							"key": "b",
+							"value": "Ivan"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "不传入参数\ba",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a不为int",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=notint&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "notint"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数b为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1&b=",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a和b均合法有效",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/test?a=1&b=Ivan",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数\ba为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": ""
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "不传入参数b",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				}
+			]
+		},
+		{
+			"name": "不传入参数b",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/test?a=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					],
+					"query": [
+						{
+							"key": "a",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "参数\ba为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": ""
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a和b均合法有效",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/test?a=1&b=Ivan",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "不传入参数b",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a不为int",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=notint&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "notint"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "不传入参数\ba",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数b为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1&b=",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				}
+			]
+		},
+		{
+			"name": "参数b为空",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/test?a=1&b=",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					],
+					"query": [
+						{
+							"key": "a",
+							"value": "1"
+						},
+						{
+							"key": "b",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "参数b为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1&b=",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a和b均合法有效",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/test?a=1&b=Ivan",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数a不为int",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=notint&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "notint"
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "参数\ba为空",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=&b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": ""
+								},
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "不传入参数\ba",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?b=Ivan",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "b",
+									"value": "Ivan"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				},
+				{
+					"name": "不传入参数b",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/test?a=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"test"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2019 17:43:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.1 Python/2.7.13"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_message\": \"success\",\n    \"error_code\": 0,\n    \"reference\": \"NO.1 is Ivan\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "20ba12d1-a9d5-4adf-a676-bfe7e30751b9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3ffae226-2c54-41cf-99b4-9175ce021785",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test(\"response must be a valid json body\", function () {",
+					"     // assert that the response has a valid JSON body",
+					"     pm.response.to.be.json;",
+					"});",
+					"var json_data = pm.response.json()",
+					"",
+					"var json_schema = {",
+					"  \"properties\": {",
+					"    \"err_code\": {",
+					"      \"type\": \"integer\"",
+					"    },",
+					"    \"err_msg\": {",
+					"      \"type\": \"string\"",
+					"    },",
+					"    \"reference\": {",
+					"      \"type\": \"string\"",
+					"    }",
+					"  },",
+					"  \"required\": [",
+					"    \"err_code\",",
+					"    \"err_msg\",",
+					"    \"reference\"",
+					"  ]",
+					"}",
+					"pm.test(\"reponse json schema matched\", function () {",
+					"    pm.expect(tv4.validate(json_data, json_schema)).to.be.true;",
+					"});",
+					"",
+					"var err_code = json_data.err_code,",
+					"    err_msg = json_data.err_msg,",
+					"    reference = json_data.reference",
+					"",
+					"pm.test(\"err_code in response json is expected\", function () {",
+					"    pm.expect(err_code).to.be.oneOf([0,11,21]);",
+					"}); ",
+					"",
+					"if(err_code === 0) {",
+					"    pm.test(\"reference is expected when err_code = 0\", function () {",
+					"        pm.expect(reference).to.eql(\"NO.1 is Ivan\");",
+					"    });",
+					"    pm.test(\"err_msg is right when err_code = 0\", function () {",
+					"        pm.expect(err_msg).to.eql(\"success\");",
+					"    });",
+					"}else{",
+					"    pm.test(\"reference is expected when err_code != 0\", function () {",
+					"        pm.expect(reference).to.eql(err_msg);",
+					"    }); ",
+					"    ",
+					"    if(err_code === 11) {",
+					"        pm.test(\"err_msg is right when err_code = 11\", function () {",
+					"            pm.expect(err_msg).to.eql(\"system error\");",
+					"        });",
+					"    }else if (err_code === 21){",
+					"         pm.test(\"reference is expected when err_code = 21\", function () {",
+					"            pm.expect(reference).to.eql(\"empty or wrong params\");",
+					"        });       ",
+					"    }",
+					"}"
+				]
+			}
+		}
+	]
+}
