@@ -1,2 +1,2 @@
 # entrytask
-entrytask for dun su
+entrytask for Dun Su
